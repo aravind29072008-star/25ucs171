@@ -1,3 +1,5 @@
+from queue import Queue
+
 def is_palindrome(text):
     queue = Queue()
     cleaned = ""
