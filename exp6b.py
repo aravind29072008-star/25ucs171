@@ -1,29 +1,38 @@
-from queue import Queue
+tack = []
+queue = []
 
-def is_palindrome(text):
-    queue = Queue()
-    cleaned = ""
+def push(item):
+    stack.append(item)
 
-    # Remove special characters and convert to lowercase
-    for ch in text:
-        if ch.isalnum():
-            cleaned += ch.lower()
+def pop():
+    return stack.pop()
 
-    # Insert characters into the queue
-    for ch in cleaned:
-        queue.put(ch)
+def enqueue(item):
+    queue.append(item)
 
-    # Compare queue elements with reversed string
-    for ch in reversed(cleaned):
-        if queue.get() != ch:
-            return False
+def dequeue():
+    return queue.pop(0)
 
-    return True
-
-# Main Program
 text = input("Enter a string: ")
 
-if is_palindrome(text):
-    print("The given string is a Palindrome.")
+clean = ""
+
+for ch in text:
+    if ch.isalnum():
+        clean += ch.lower()
+
+for ch in clean:
+    push(ch)
+    enqueue(ch)
+
+palindrome = True
+
+while stack:
+    if pop() != dequeue():
+        palindrome = False
+        break
+
+if palindrome:
+    print("Palindrome")
 else:
-    print("The given string is Not a Palindrome.")
+    print("Not a Palindrome")
